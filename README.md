@@ -13,14 +13,11 @@ One can plot the approximation on a wider domain such as ($-3.5, 4.5)$
 ```matlab
 zz = linspace(-3.5,4.5,1000).';
 figure()
-plot(zz,r(zz))
-xlim([-3.5 4.5])
-ylim([-8 8])
-grid on
-xlabel('x')
-ylabel('r(x)')
+plot(zz,r(zz)), xlim([-3.5 4.5]), ylim([-8 8]), grid on
+xlabel('x'), ylabel('r(x)')
 title('Rational approximation of the Gamma function')
 ```
+<img width="1167" height="875" alt="gamma" src="https://github.com/user-attachments/assets/c34aa0fb-e33a-4eed-a973-95e050cc070c" />
 It can be checked that the obtained poles on the negative axis and their associated residues agree well with the first ones of $\Gamma(z)$ although their accuracy decreases as one moves further from the interpolation interval. Recall that $\Gamma(z)$ has poles $0,-1,-2,-3,\ldots$ and associated [residues](https://en.wikipedia.org/wiki/Gamma_function#Residues) $Res(\Gamma,-k) = (-1)^k /k!$.
 ```matlab
 [pol(find(real(pol)<eps)) res(find(real(pol)<eps))]
