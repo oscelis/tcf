@@ -12,9 +12,7 @@ f = @(z) gamma(z);
 One can check the accuracy of the approximation
 ```matlab
 norm(f(Z)-r(Z),inf)
-
 ans =
-
    2.0941e-12
 ```
 One can plot the approximation on a wider domain such as ($-3.5, 4.5)$
@@ -31,8 +29,6 @@ It can be checked that the obtained poles on the negative axis and their associa
 
 ```matlab
 [pol(find(real(pol)<eps)) res(find(real(pol)<eps))]
-```
-```matlab
 ans =
    0.0000 + 0.0000i   1.0000 - 0.0000i
   -1.0000 + 0.0000i  -1.0000 + 0.0000i
