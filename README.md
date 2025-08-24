@@ -9,6 +9,14 @@ Z = linspace(-1.5,1.5);
 f = @(z) gamma(z);
 [r,pol,res] = tcf(f,Z);
 ```
+One can check the accuracy of the approximation
+```matlab
+norm(f(Z)-r(Z),inf)
+
+ans =
+
+   2.0941e-12
+```
 One can plot the approximation on a wider domain such as ($-3.5, 4.5)$
 ```matlab
 zz = linspace(-3.5,4.5,1000).';
