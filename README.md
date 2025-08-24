@@ -24,7 +24,6 @@ xlabel('x'), ylabel('r(x)')
 title('Rational approximation of the Gamma function')
 ```
 ![gamma](https://github.com/user-attachments/assets/c34aa0fb-e33a-4eed-a973-95e050cc070c)
-
 It can be checked that the obtained poles on the negative axis and their associated residues agree well with the first ones of $\Gamma(z)$ although their accuracy decreases as one moves further from the interpolation interval. Recall that $\Gamma(z)$ has poles $0,-1,-2,-3,\ldots$ and associated [residues](https://en.wikipedia.org/wiki/Gamma_function#Residues) $Res(\Gamma,-k) = (-1)^k /k!$.
 
 ```matlab
