@@ -6,13 +6,13 @@
 %    data f on the sample points x. f may be given by its values at x,
 %    or as a function handle.
 %
-%  [R, POL, ZER, RES] = tcf(f, x) returns vectors of poles, residues, and zeros of R.
+%  [R, POL, RES, ZER] = tcf(f, x) returns vectors of poles, residues, and zeros of R.
 %    
-%  [R, POL, ZER, RES, PHIJ, XJ] = tcf(f, x) also returns the vectors of
+%  [R, POL, RES, ZER, PHIJ, XJ] = tcf(f, x) also returns the vectors of
 %   interpolation points XJ and inverse differences PHIJ of the
 %   Thiele continued fraction representation of R. 
 %
-%  [R, POL, ZER, RES, PHIJ, XJ, ERRVEC] = tcf(f, x) also returns the vector
+%  [R, POL, RES, ZER, PHIJ, XJ, ERRVEC] = tcf(f, x) also returns the vector
 %   of errors ||f-r||_infty in successive iterative steps of tcf. 
 %
 %  R = tcf(f, x, NAME, VALUE) sets the following parameters:
@@ -38,7 +38,7 @@
 %   [2] Balancing regular matrix pencils. D. Lemonnier and P. Van Dooren.  
 %   SIAM Journal on Matrix Analysis and Applications, 28(1):253–263, 2006.
 
-function [r,pol, zer, res, aa, zz, err, ss] = tcf(ff,xx, varargin)
+function [r,pol,res,zer,aa, zz, err, ss] = tcf(ff,xx, varargin)
 % Parse inputs:
 [ff, xx, nmax, tol, eqtm, prz, bal] = parseInputs(ff,xx, varargin{:});
 
@@ -83,7 +83,7 @@ abstol = tol*norm(ff, inf);   % Absolute tolerance
     r = @(Z) evalcfrac(aa,zz,ss,Z);
     err = err(~isnan(err));
     pol = []; zer = []; res = [];
-    if prz == 1, [pol,zer, res] = prz_cfrac(aa,zz,ss, bal); end
+    if prz == 1, [pol,zer,res] = prz_cfrac(aa,zz,ss, bal); end
 end
 
 % FUNCTION NAME:
@@ -185,7 +185,7 @@ end
 %
 %
 % See also tcf, evalcfrac
-function [pol,zer, res] = prz_cfrac(aa,zz,ss, bal)
+function [pol,zer,res] = prz_cfrac(aa,zz,ss, bal)
     k   = max(find(~isnan(aa), 1, 'last' ));
     C   = -diag(ss(2:(k-1)),1);
     Dp  = diag(aa(2:k))-diag(ss(2:(k-1)).*zz(2:(k-1)),1)-diag(ones(k-2,1),-1);
@@ -211,7 +211,7 @@ function [pol,zer, res] = prz_cfrac(aa,zz,ss, bal)
     dz = 1e-5*exp(2i*pi*(1:4)/4);
     pz = bsxfun(@plus,pol,dz);
     for k = 1:length(pol)
-        res(k)=(evalcfrac(aa,zz, ss, pz(k,:).').')*(dz.')/4;
+        res(k)=(evalcfrac(aa,zz,ss,pz(k,:)))*(dz.')/4;
     end
 end
 
