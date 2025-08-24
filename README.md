@@ -9,7 +9,7 @@ Z = linspace(-1.5,1.5);
 f = @(z) gamma(z);
 [r,pol,res] = tcf(f,Z);
 ```
-One can check the accuracy of the approximation
+Let us check the accuracy of the approximation
 ```matlab
 norm(f(Z)-r(Z),inf)
 ans =
